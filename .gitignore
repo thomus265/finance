@@ -1,0 +1,92 @@
+# Environment and Configuration Files
+.env
+.env.local
+.env.production
+.env.staging
+config/local.php
+config/production.php
+
+# Sensitive SMTP Configuration (if using separate files)
+controller/smtp_config_local.php
+controller/smtp_config_production.php
+
+# Log Files
+*.log
+logs/
+error.log
+access.log
+
+# Temporary Files
+tmp/
+temp/
+cache/
+*.tmp
+*.temp
+
+# Upload Directories (optional - depends on your needs)
+public/attachments/*
+!public/attachments/.gitkeep
+uploads/
+files/
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Composer Dependencies (if using Composer)
+vendor/
+composer.lock
+
+# Node.js Dependencies (if using npm/yarn)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build and Distribution Files
+dist/
+build/
+*.min.js
+*.min.css
+
+# Database Files
+*.sqlite
+*.db
+database/backups/
+
+# System Files
+.htaccess.backup
+.htpasswd
+robots.txt.backup
+
+# PHP Specific
+*.php~
+*.php.bak
+
+# Backup Files
+*.backup
+*.bak
+*.old
+
+# Security Files
+private_keys/
+certificates/
+ssl/
+
+# Development Tools
+phpunit.xml
+.phpunit.result.cache
+coverage/
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

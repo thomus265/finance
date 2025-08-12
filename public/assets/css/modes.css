@@ -1,0 +1,296 @@
+:root {
+  /* Light Theme Defaults (Global) */
+  --switchBg: liner-gradient(180deg, #ffcc89,#d8860b);
+  --background-color: #f2f2f2;
+  --text-color: #333333;
+  --primary-color: #007bff;
+  --border-color: #dddddd;
+  --card-background: #f9f9f9;
+  --button-text-color: #ffffff;
+  --box-shadow-color: rgba(0, 0, 0, 0.1); /* Light theme subtle shadow */
+  --trackbg: #ffffff;
+  /* Light Theme Navbar Specific */
+  --navbar-background: #ffffff;
+  --navbar-text: #333333;
+
+  /* Light Theme Sidebar Specific */
+  --sidebar-background: #ffffff;
+  --sidebar-text: #333333;
+  --sidebar-link-hover: #f0f0f0;
+  --sidebar-active-link-bg: #e0e0e0;
+  --sidebar-active-link-text: #007bff;
+  --hr-color: #dddddd;
+
+  /* Light Theme Switch Button Specific */
+  --switch-track-light-bg: #ccc; /* Default background for the track */
+  --switch-thumb: #f2f2f2; /* Color of the thumb in light mode */
+  --sun-icon-color: #ffc107; /* Color of the sun icon */
+  --moon-icon-color: #bbbbbb; /* Color of the moon icon in light mode (less prominent) */
+  --shadow: inset 0px 5px 15px rgba(236, 233, 233, 0.4), inset 0px -5px 15px rgba(255,255,255,0.4);
+}
+
+html[data-theme='dark'] {
+  /* Dark Theme Overrides (Global) */
+  --background-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --primary-color: #66b3ff;
+  --border-color: #555555;
+  --card-background: #2a2a2a;
+  --button-text-color: #1a1a1a;
+  --box-shadow-color: rgba(0, 0, 0, 0.4); /* Dark theme more visible shadow, or rgba(0,0,0,0) for no shadow */
+  --shadow: inset 0px 5px 15px rgba(26, 26, 26, 0.4), inset 0px -5px 15px rgba(30,30,30,0.4);
+  --switchBg: liner-gradient(180deg,rgb(39, 37, 35),rgb(109, 108, 107));
+  --trackbg: #2a2a2a;
+  /* Dark Theme Navbar Specific Overrides */
+  --navbar-background: #2a2a2a;
+  --navbar-text: #f0f0f0;
+
+  /* Dark Theme Sidebar Specific Overrides */
+  --sidebar-background: #333333;
+  --sidebar-text: #e0e0e0;
+  --sidebar-link-hover: #444444;
+  --sidebar-active-link-bg: #555555;
+  --sidebar-active-link-text: #66b3ff;
+  --hr-color: #777777;
+
+  /* Dark Theme Switch Button Specific Overrides */
+  --switch-track-dark-bg: #555; /* Background for the track in dark mode */
+  --switch-thumb:rgb(202, 200, 200); /* Color of the thumb in dark mode */
+  /* Sun/moon icon colors are handled by opacity now, but you could define separate colors here if needed */
+}
+
+
+
+/* Theme Switch Button Styling */
+.theme-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60px; /* Adjust as needed */
+  height: 30px; /* Adjust as needed */
+  padding: 0 5px; /* Padding for icons to be inside */
+  background-color: var(--switch-track-light-bg); /* Use theme variable */
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* Reset default button styles if not already handled */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  overflow: hidden; /* Important: Clip anything outside the button boundaries */
+}
+
+html[data-theme='dark'] .theme-switch {
+  background-color: var(--switch-track-dark-bg);
+}
+
+.sun-icon,
+.moon-icon {
+  font-size: 1.2em; /* Adjust icon size */
+  position: absolute; /* Crucial for positioning within the button */
+  transition: opacity 0.3s ease, color 0.3s ease;
+  /* Ensure a font that supports emojis is available */
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Symbol", sans-serif;
+  line-height: 1; /* Helps with vertical alignment */
+  z-index: 2; /* Make sure icons are above the thumb */
+  background-color: liner-gradient(180deg, #ffcc89,#d8860b);
+}
+
+.sun-icon {
+  left: 5px; /* Position sun icon to the left within the switch */
+  color: var(--sun-icon-color);
+  opacity: 1; /* Sun visible in light mode */
+  background: liner-gradient(180deg, #ffcc89,#d8860b);;
+}
+
+html[data-theme='dark'] .sun-icon {
+  opacity: 0; /* Sun hidden in dark mode */
+}
+
+.moon-icon {
+  right: 5px; /* Position moon icon to the right within the switch */
+  color: var(--moon-icon-color);
+  opacity: 0; /* Moon hidden in light mode */
+}
+
+html[data-theme='dark'] .moon-icon {
+  opacity: 1; /* Moon visible in dark mode */
+}
+
+.switch-track {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border-radius: 13px;
+  background: var(--trackbg);
+  border-radius: 25px;
+  box-shadow: inset 0px 5px 15px rgba(0,0,0,0.4), inset 0px -5px 15px rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: 0.3s;
+  pointer-events: none; /* Allows clicks to pass through to the button */
+  z-index: 1; /* Track behind the thumb */
+}
+
+.switch-thumb{
+  position: absolute;
+  top: 1px; /* Vertical centering within the 30px height (30 - 24 = 6; 6/2 = 3) */
+  left: 3px; /* Initial position on the left */
+  width: 24px; /* Adjust thumb size */
+  height: 24px; /* Adjust thumb size */
+  background-color: var(--switchBg) !important; /* Use theme variable */
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s cubic-bezier(0.4, 2, 0.6, 1), background-color 0.3s ease;
+  z-index: 2; /* Keep thumb above track but below icons */
+}
+
+html[data-theme='dark'] .switch-thumb {
+  transform: translateX(23px); /* Move thumb to the right */
+  background-color: var(--switchBg); /* Use theme variable */
+}
+
+/* Optional: Automatic detection based on user's system preferences */
+@media (prefers-color-scheme: dark) {
+  /* Apply dark theme variables if system preference is dark, only if no explicit data-theme is set */
+  html:not([data-theme='light']) {
+      --background-color: #1a1a1a;
+      --text-color: #e0e0e0;
+      --primary-color: #66b3ff;
+      --border-color: #555555;
+      --card-background: #2a2a2a;
+      --button-text-color: #1a1a1a;
+      --box-shadow-color: rgba(0, 0, 0, 0.4);
+
+      --navbar-background: #2a2a2a;
+      --navbar-text: #f0f0f0;
+
+      --sidebar-background: #333333;
+      --sidebar-text: #e0e0e0;
+      --sidebar-link-hover: #444444;
+      --sidebar-active-link-bg: #555555;
+      --sidebar-active-link-text: #66b3ff;
+      --hr-color: #777777;
+
+      /* Dark mode initial values for switch, when system prefers dark */
+      --switch-track-light-bg: #555;
+      --switch-thumb-light-bg: #eeeeee;
+      --sun-icon-color: #bbbbbb; /* Sun less prominent in dark mode */
+      --moon-icon-color: #f0f0f0; /* Moon prominent in dark mode */
+  }
+}
+/*change default color styling*/
+body{
+  background: var(--background-color);
+}
+#layout-menu{
+  background: var(--background-color) !important;
+}
+.card{
+  background: var(--card-background) !important;
+}
+#layout-navbar{
+  background: var(--card-background) !important;
+}
+input{
+  background: var(--background-color) !important;
+}
+.bg-footer-theme{
+  background: var(--background-color) !important;
+}
+h1,h2,h3,h4,p{
+  color: var(--text-color) !important;
+}
+
+.brand>img{
+  margin-right: -70px !important
+}
+.custom-dropdown-bg,.modal-content{
+  background-color: var(--card-background) !important;
+}
+.modal-content,.modal-dialog,.btn,.card,#layout-navbar{
+  border-radius: 25px !important;
+}
+.btn-close{
+  background-color: var(--background-color) !important;
+}
+.nav-left{
+  margin-top: 20px;
+}
+.nav-right{
+  margin-bottom: 20px;
+}
+/**/.drop-area {
+  border: 2px dashed #007bff;
+  border-radius: 25px;
+  padding: 40px;
+  text-align: center;
+  color: #007bff;
+  cursor: pointer;
+  user-select: none;
+}
+.drop-area.dragover {
+  background-color: #f0f8ff;
+}
+.file-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  color: #333;
+  font-size: 14px;
+  text-align: left;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.file-list li {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+.file-icon {
+  font-size: 18px;
+  margin-right: 8px;
+  width: 24px;
+  text-align: center;
+}
+button {
+  margin-top: 15px;
+  padding: 8px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.btn-primary{
+  color: #f2f2f2 !important;
+}
+/* Make sweet alert visible*/
+.swal2-container {
+  z-index: 999999999 !important;
+}
+input,textarea{
+  border-radius: 25px !important;
+  
+}
+
+
+.valid-input {
+  border-color: rgb(15, 187, 15) !important;
+}
+
+.invalid-input {
+  border-color: rgb(228, 21, 21) !important;
+}
+
+#email-error {
+  font-size: 0.9em;
+  margin-top: 5px;
+  display: none;
+}
+
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th.sortable:hover { cursor: pointer; background-color: #f2f2f2; }

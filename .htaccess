@@ -1,0 +1,38 @@
+RewriteEngine On
+
+# Apply rewrite rules only if the request is not for a directory or file
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+# Custom 404 Error Page
+ErrorDocument 404 /errors/404.html
+
+# Logo redirect
+RewriteRule ^logo\.png$ /public/assets/img/favicon/favicon.ico [R=301,L]
+
+# General URLs
+RewriteRule ^login/(.*)$ index.php?q=$1 [QSA]
+RewriteRule ^create_account/?$ create_acc.php [QSA]
+
+# User URLs
+RewriteRule ^user/?$ user/index.php [QSA]
+RewriteRule ^user_transactions/(.*)$ user/transactions.php?q=$1 [QSA]
+RewriteRule ^user_profile/?$ public/user/profile.php [QSA]
+
+
+#finance
+RewriteRule ^finance/?$ finance/index.php [QSA]
+RewriteRule ^finance_dashboard/?$ finance/dashboard.php [QSA]
+RewriteRule ^finance_transactions/(.*)$ finance/transactions.php?q=$1 [QSA]
+RewriteRule ^finance_profile/(.*)$ finance/profile.php?q=$1 [QSA]
+RewriteRule ^finance_archive/(.*)$ finance/transactions.php?q=$1 [QSA]
+#auth
+RewriteRule ^auth/?$ auth.php [QSA]
+
+RewriteRule ^reset_code/(.*)$ public/admin/reset_code.php?q=$1 [QSA]
+#onboarding admin
+
+# Authentication URLs
+
+RewriteRule ^logout/(.*)$ logout.php?q=$1 [QSA]
+RewriteRule ^forgot_password/(.*)$ public/pass/index.php?q=$1 [QSA]

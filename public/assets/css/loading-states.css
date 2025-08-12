@@ -1,0 +1,333 @@
+/**
+ * Loading States CSS
+ * 
+ * Styles for loading states and spinners across the application
+ */
+
+/* Loading Spinner */
+.spinner-border {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    vertical-align: text-bottom;
+    border: 0.125em solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spinner-border 0.75s linear infinite;
+}
+
+.spinner-border-sm {
+    width: 0.875rem;
+    height: 0.875rem;
+    border-width: 0.125em;
+}
+
+.spinner-border-lg {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-width: 0.2em;
+}
+
+@keyframes spinner-border {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Button Loading States */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.8;
+    cursor: not-allowed !important;
+}
+
+.btn-loading:hover {
+    opacity: 0.8;
+}
+
+.btn-loading .loading-spinner {
+    margin-right: 8px;
+}
+
+/* Form Loading States */
+.form-loading {
+    opacity: 0.6;
+    pointer-events: none;
+    background-color: #f8f9fa !important;
+}
+
+.form-loading:focus {
+    box-shadow: none !important;
+    border-color: #ced4da !important;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    border-radius: inherit;
+}
+
+.loading-overlay .spinner-border {
+    width: 2rem;
+    height: 2rem;
+    border-width: 0.2em;
+    color: #007bff;
+}
+
+/* Card Loading State */
+.card-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    animation: loading-shimmer 1.5s infinite;
+    z-index: 1;
+}
+
+@keyframes loading-shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Table Loading State */
+.table-loading {
+    position: relative;
+}
+
+.table-loading tbody {
+    opacity: 0.5;
+}
+
+.table-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* Loading Text Animation */
+.loading-text::after {
+    content: '';
+    animation: loading-dots 1.5s infinite;
+}
+
+@keyframes loading-dots {
+    0%, 20% {
+        content: '';
+    }
+    40% {
+        content: '.';
+    }
+    60% {
+        content: '..';
+    }
+    80%, 100% {
+        content: '...';
+    }
+}
+
+/* Pulse Animation for Loading Elements */
+.loading-pulse {
+    animation: loading-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loading-pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Skeleton Loading */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton-text {
+    height: 1em;
+    margin-bottom: 0.5em;
+    border-radius: 4px;
+}
+
+.skeleton-text:last-child {
+    margin-bottom: 0;
+    width: 80%;
+}
+
+/* Loading States for Specific Components */
+
+/* Transaction Cards */
+.transaction-card.loading {
+    pointer-events: none;
+}
+
+.transaction-card.loading .card-body {
+    opacity: 0.6;
+}
+
+/* Action Buttons */
+.action-btn.loading {
+    min-width: 120px; /* Prevent button size changes */
+}
+
+.action-btn.loading .btn-text {
+    display: none;
+}
+
+.action-btn.loading .loading-spinner {
+    display: inline-block;
+}
+
+/* File Upload Loading */
+.file-upload-loading {
+    position: relative;
+}
+
+.file-upload-loading::after {
+    content: 'Uploading...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 123, 255, 0.9);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    z-index: 100;
+}
+
+/* State Change Loading */
+.state-change-loading {
+    position: relative;
+    opacity: 0.7;
+}
+
+.state-change-loading select,
+.state-change-loading button {
+    pointer-events: none;
+}
+
+/* Email Configuration Loading */
+.email-config-loading {
+    background: #f8f9fa;
+    border: 1px dashed #dee2e6;
+    padding: 20px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.email-config-loading::before {
+    content: '📧';
+    font-size: 2em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.email-config-loading::after {
+    content: 'Loading email configuration...';
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Responsive Loading States */
+@media (max-width: 768px) {
+    .btn-loading {
+        min-width: 100px;
+        font-size: 0.875rem;
+    }
+    
+    .loading-overlay .spinner-border {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    
+    .action-btn.loading {
+        min-width: 100px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .loading-overlay {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+    
+    .form-loading {
+        background-color: #343a40 !important;
+    }
+    
+    .skeleton {
+        background: linear-gradient(90deg, #343a40 25%, #495057 50%, #343a40 75%);
+        background-size: 200% 100%;
+    }
+}
+
+/* Accessibility */
+.loading-spinner[aria-hidden="true"] {
+    speak: none;
+}
+
+.btn-loading:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    .loading-spinner,
+    .loading-overlay,
+    .btn-loading {
+        display: none !important;
+    }
+}
